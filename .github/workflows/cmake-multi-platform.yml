@@ -47,12 +47,16 @@ jobs:
       id: checkout
       uses: actions/checkout@v4
 
-    - name: Install libmapper
+    - name: Install Homebrew (macOS only)
+      id: install-homebrew
+      if: contains(matrix.os,'macos')
+      run: |
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    - name: Install libmapper (macOS only)
       id: install-libmapper
-      uses: jaxxstorm/action-install-gh-release@v1.10.0
-      with: # Grab a specific tag
-        repo: libmapper/libmapper
-        tag: v2.5.1
+      if: contains(matrix.os,'macos')
+      run: |
+        sudo brew install libmapper
 
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
