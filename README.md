@@ -23,22 +23,10 @@ Please follow the [libmapper](https://github.com/libmapper/libmapper) documentat
 
 ## Compilation from source
 
-### GNU/Linux
-
-```
-git clone https://github.com/IDMIL/MapperUGen.git
-cd MapperUGen
-mkdir build && cd build
-cmake -DSUPERNOVA=ON ..
-cmake --build . --target install
-```
-
-### macOS/Windows
-
 ```
 git clone --recursive https://github.com/IDMIL/MapperUGen.git
 cd MapperUGen
-mkdir build && cd build
-cmake -DSUPERNOVA=ON ..
-cmake --build . --target install
+mkdir -p build
+cmake -B ./build -DSUPERNOVA=ON
+cmake --build build --target install
 ```
