@@ -1,5 +1,5 @@
 set(FILENAME "Mapper.cpp") #specify the .cpp file here
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 4.3)
 get_filename_component(PROJECT ${FILENAME} NAME_WE) #automatically sets project name from the filename
 # set(PROJECT "my_name") #alternatively set project name manually
 message(STATUS "Project name is ${PROJECT}")
@@ -121,6 +121,16 @@ endif()
 if(MINGW)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mstackrealign")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mstackrealign")
+endif()
+
+if(APPLE)
+    if(DEFINED ENV{HOMEBREW_PREFIX})
+        message(STATUS "Homebrew detected with prefix " $ENV{HOMEBREW_PREFIX})
+        include_directories(SYSTEM $ENV{HOMEBREW_PREFIX}/include)
+        link_directories(SYSTEM $ENV{HOMEBREW_PREFIX}/lib)
+    else()
+        message(STATUS "Homebrew not detected")
+    endif()
 endif()
 
 add_library(${PROJECT} MODULE ${FILENAME})
