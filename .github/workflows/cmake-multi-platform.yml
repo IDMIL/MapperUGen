@@ -25,7 +25,7 @@ jobs:
       matrix:
         os: [macos-latest] #, ubuntu-latest, windows-latest]
         build_type: [Release]
-        c_compiler: [clang] #, gcc, cl]
+        c_compiler: [cc] #, clang, gcc, cl]
         include:
           - os: macos-latest
             c_compiler: cc
