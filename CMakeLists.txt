@@ -123,6 +123,16 @@ if(MINGW)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mstackrealign")
 endif()
 
+if(APPLE)
+    if(DEFINED ENV{HOMEBREW_PREFIX})
+        message(STATUS "Homebrew detected with prefix " $ENV{HOMEBREW_PREFIX})
+        include_directories(SYSTEM $ENV{HOMEBREW_PREFIX}/include)
+        link_directories(SYSTEM $ENV{HOMEBREW_PREFIX}/lib)
+    else()
+        message(STATUS "Homebrew not detected")
+    endif()
+endif()
+
 add_library(${PROJECT} MODULE ${FILENAME})
 target_link_libraries(${PROJECT} ${MAPPER_LIB} ${Boost_libraries})
 
